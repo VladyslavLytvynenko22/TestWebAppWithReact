@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IronPdf;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TestWebAppWithReact.Controllers
 {
@@ -21,6 +22,9 @@ namespace TestWebAppWithReact.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            var pdf = new ChromePdfRenderer();
+            var doc = pdf.RenderHtmlAsPdf("<h1>This is a heading</h1>");
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
